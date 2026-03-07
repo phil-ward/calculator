@@ -44,3 +44,11 @@ button.right-column {
 button.top-row {
     background-color: grey;
 }
+
+.output{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    color: white;
+    font-size: 72px;
+}
