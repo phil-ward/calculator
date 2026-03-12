@@ -30,7 +30,11 @@ function operate(num1, num2, operation){
         case "*":
             return multiply(num1, num2)
         case "/":
-            return divide(num1, num2).toFixed(2)
+            if (num2 === 0){
+                return "Undefined"
+            } else {
+                return divide(num1, num2).toFixed(2)
+            }
     }
 }
 
@@ -45,6 +49,16 @@ function clearScreen(){
     updateScreen()
 }
 
+function backspace(){
+    if (numberTwo !== "") {
+        numberTwo = numberTwo.slice(0, -1)
+    } else if (operator !== "") {
+        operator = operator.slice(0, -1)
+    } else {
+        numberOne = numberOne.slice(0,-1)
+    }
+    updateScreen()
+}
 
 const buttons = document.querySelectorAll("button")
 
@@ -54,8 +68,9 @@ const clickEvent = (event) => {
         clearScreen()
         numberOne = result
         updateScreen()
-    }
-    else if (operators.includes(event.target.innerText) && operator === ""){
+    } else if (event.target.innerText === '<='){
+        backspace()
+    } else if (operators.includes(event.target.innerText) && operator === ""){
         operator = event.target.innerText
         updateScreen(operator)
     } else if (operators.includes(event.target.innerText) && operator !== ""){
@@ -66,14 +81,16 @@ const clickEvent = (event) => {
         updateScreen()
     } else if (event.target.innerText === 'C') {
         clearScreen()
-    }else if (operator === "") {
+    } else if (event.target.innerText === '<=') {
+        backspace()
+    } else if (operator === "") {
         numberOne += event.target.innerText
         updateScreen()
     } else if (operator !== "") {
         numberTwo += event.target.innerText
         updateScreen()
     } 
-    console.log(`${event.target.innerText} button clicked!`)
+    // console.log(`${event.target.innerText} button clicked!`)
 }
 
 buttons.forEach((button) => {
