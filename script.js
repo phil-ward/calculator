@@ -66,7 +66,7 @@ const buttons = document.querySelectorAll("button");
 const clickEvent = (event) => {
   if (event.target.innerText === "=") {
     if (numberOne !== "" && operator !== "" && numberTwo !== "") {
-      result = operate(parseInt(numberOne), parseInt(numberTwo), operator);
+      result = operate(parseFloat(numberOne), parseFloat(numberTwo), operator);
       if (result % 1 !== 0 && typeof(result) !== 'string'){
         result = result.toFixed(2)
       }
@@ -80,7 +80,7 @@ const clickEvent = (event) => {
     operator = event.target.innerText;
     updateScreen(operator);
   } else if (operators.includes(event.target.innerText) && operator !== "") {
-    let result = operate(parseInt(numberOne), parseInt(numberTwo), operator);
+    let result = operate(parseFloat(numberOne), parseFloat(numberTwo), operator);
     clearScreen();
     numberOne = result;
     operator = event.target.innerText;
